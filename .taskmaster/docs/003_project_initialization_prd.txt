@@ -1,0 +1,457 @@
+<context>
+# Overview
+The Project Initialization phase transforms technical specifications into a functional development environment. This phase sets up the monorepo structure, initializes frontend and backend applications, configures the database, establishes CI/CD pipelines, and creates the foundational code architecture. The goal is to create a production-ready development environment where the team can immediately begin implementing MVP features with confidence in the underlying infrastructure.
+
+# Core Features
+Project initialization encompasses setting up the complete development ecosystem:
+
+**Monorepo Structure**
+- Configure Turborepo or Nx for monorepo management
+- Create workspace structure: apps/ (web, api, admin) and packages/ (database, ui, types, utils, ai, payments)
+- Set up shared configuration for TypeScript, ESLint, Prettier
+- Configure package.json workspaces and dependency management
+- Establish build and development scripts
+
+**Frontend Application Setup**
+- Initialize Next.js 14+ application with TypeScript in apps/web
+- Configure Tailwind CSS and Shadcn/ui components
+- Set up React Query for server state management
+- Configure Zustand for client state management
+- Implement authentication context and protected routes
+- Create base layout components (header, navigation, footer)
+- Set up routing structure for tenant, owner, and admin portals
+
+**Backend API Setup**
+- Initialize Node.js TypeScript application in apps/api
+- Set up Express/Fastify or Apollo Server based on technical planning
+- Configure middleware (CORS, rate limiting, compression, logging)
+- Implement authentication middleware with JWT
+- Create base route structure and error handling
+- Set up environment configuration management
+- Configure logging (Winston or Pino)
+
+**Database Configuration**
+- Set up Prisma schema in packages/database
+- Define initial database models (User, Property, Unit, Lease, Payment, MaintenanceRequest)
+- Create initial migrations
+- Set up database connection pooling
+- Configure seed scripts for local development data
+- Implement multi-tenant data isolation utilities
+
+**CI/CD Pipeline**
+- Configure GitHub Actions for automated testing and deployment
+- Set up linting and type-checking on pull requests
+- Implement automated unit test execution
+- Configure deployment workflows for frontend (Vercel) and backend (AWS/Railway)
+- Set up environment-specific deployments (development, staging, production)
+- Configure automated database migrations on deployment
+</context>
+
+<PRD>
+# User Experience
+While primarily technical, project initialization enables developer experience and sets foundations for user experience:
+
+**Developer Experience Goals**
+- One-command setup: `npm install && npm run dev` starts entire application
+- Type safety across frontend and backend with shared types
+- Hot reload for rapid development iteration
+- Clear error messages and debugging capabilities
+- Automated code formatting and linting
+- Fast feedback loops (tests run in <30 seconds)
+
+**Foundation for User Experience**
+- Server-side rendering setup for fast initial page loads
+- Image optimization configuration for performance
+- Route structure that supports intuitive navigation
+- Authentication flow that's secure and user-friendly
+- Error boundaries for graceful error handling
+- Loading states and skeleton screens for perceived performance
+
+# Technical Architecture
+**Monorepo Structure**
+
+```
+braystar-pms/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml           # Lint, typecheck, test on PR
+│       ├── deploy-web.yml   # Deploy frontend to Vercel
+│       └── deploy-api.yml   # Deploy backend to Railway/AWS
+├── apps/
+│   ├── web/                 # Next.js frontend
+│   │   ├── src/
+│   │   │   ├── app/         # Next.js App Router
+│   │   │   │   ├── (auth)/  # Auth routes (login, register)
+│   │   │   │   ├── tenant/  # Tenant portal routes
+│   │   │   │   ├── owner/   # Owner portal routes
+│   │   │   │   └── layout.tsx
+│   │   │   ├── components/  # React components
+│   │   │   ├── lib/         # Client utilities
+│   │   │   └── styles/      # Global styles
+│   │   ├── public/          # Static assets
+│   │   ├── next.config.js
+│   │   ├── tailwind.config.js
+│   │   └── tsconfig.json
+│   └── api/                 # Backend API
+│       ├── src/
+│       │   ├── routes/      # API routes
+│       │   ├── middleware/  # Express/Fastify middleware
+│       │   ├── services/    # Business logic
+│       │   ├── utils/       # Utilities
+│       │   └── index.ts     # Server entry point
+│       ├── tests/
+│       └── tsconfig.json
+├── packages/
+│   ├── database/            # Prisma schema and client
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma
+│   │   │   ├── migrations/
+│   │   │   └── seed.ts
+│   │   └── index.ts         # Exported Prisma client
+│   ├── ui/                  # Shared React components
+│   │   ├── components/      # Reusable components
+│   │   └── index.ts
+│   ├── types/               # Shared TypeScript types
+│   │   └── index.ts
+│   ├── utils/               # Shared utilities
+│   │   └── index.ts
+│   ├── config/              # Shared configuration
+│   │   ├── eslint/
+│   │   ├── typescript/
+│   │   └── tailwind/
+│   └── tsconfig/            # Shared TypeScript configs
+├── docker/
+│   ├── docker-compose.yml   # Local development services
+│   └── Dockerfile.api       # Production API container
+├── scripts/
+│   ├── setup.sh             # Initial project setup
+│   └── seed-db.ts           # Database seeding
+├── .env.example             # Environment variable template
+├── package.json             # Root package.json
+├── turbo.json               # Turborepo configuration
+└── README.md
+```
+
+**Initial Database Models (Prisma Schema)**
+
+Core entities to implement in initial setup:
+- User (authentication and user management)
+- Property (basic property information)
+- Unit (property units for multi-family)
+- Lease (lease agreements)
+- Payment (payment transactions)
+- MaintenanceRequest (maintenance tracking)
+
+**Docker Compose for Local Development**
+
+Services to configure:
+- PostgreSQL 15 (port 5432)
+- Redis (port 6379)
+- API application (port 3001)
+- Web application (port 3000)
+
+**Environment Configuration**
+
+Required environment variables structure:
+- Database connection (DATABASE_URL, REDIS_URL)
+- Authentication secrets (JWT_SECRET, JWT_REFRESH_SECRET)
+- External services (STRIPE_SECRET_KEY, SENDGRID_API_KEY, TWILIO_API_KEY)
+- Frontend URLs (NEXT_PUBLIC_API_URL)
+- Environment flags (NODE_ENV, LOG_LEVEL)
+
+# Development Roadmap
+Project initialization is a 1-week focused setup sprint:
+
+**Day 1: Repository & Monorepo Setup**
+- Initialize Git repository and GitHub setup
+- Configure Turborepo or Nx for monorepo management
+- Create workspace structure (apps/, packages/)
+- Set up shared TypeScript, ESLint, and Prettier configurations
+- Configure package.json workspaces
+- Create initial README and documentation structure
+
+**Day 2: Frontend Application Initialization**
+- Initialize Next.js 14+ in apps/web with TypeScript
+- Install and configure Tailwind CSS and Shadcn/ui
+- Set up React Query and Zustand
+- Create base layout components
+- Implement initial routing structure
+- Configure environment variables
+
+**Day 3: Backend API Initialization**
+- Initialize Node.js TypeScript application in apps/api
+- Set up Express/Fastify or Apollo Server
+- Configure middleware (CORS, rate limiting, logging)
+- Implement basic authentication scaffolding
+- Create initial route structure
+- Set up error handling and logging
+
+**Day 4: Database Setup**
+- Initialize Prisma in packages/database
+- Define initial schema (User, Property, Unit, Lease, Payment, MaintenanceRequest)
+- Create initial migrations
+- Set up Docker Compose with PostgreSQL and Redis
+- Configure connection pooling and environment variables
+- Create seed scripts for development data
+
+**Day 5: CI/CD & Developer Experience**
+- Set up GitHub Actions workflows (CI for linting, testing)
+- Configure deployment workflows for Vercel (frontend) and Railway/AWS (backend)
+- Create setup scripts for easy onboarding
+- Test complete development flow (install → dev → build → deploy)
+- Document setup process in README
+- Verify all environments work correctly
+
+**Deliverables**
+- Complete monorepo structure with apps and packages
+- Functional Next.js frontend with basic routing and auth scaffold
+- Working backend API with authentication and base routes
+- Configured database with Prisma and initial schema
+- Docker Compose for local development
+- CI/CD pipelines for automated testing and deployment
+- Comprehensive README with setup instructions
+- Developer onboarding documentation
+
+# Logical Dependency Chain
+Project initialization has a clear sequential dependency chain:
+
+**Day 1 Foundation (Must Complete First)**
+- Repository setup must precede all other work
+- Monorepo configuration must be complete before creating apps
+- Shared configuration must be defined before app initialization
+
+**Day 2-3 Application Setup (Depends on Foundation)**
+- Frontend setup depends on monorepo structure and shared config
+- Backend setup depends on monorepo structure and shared config
+- Frontend and backend can be developed in parallel after monorepo setup
+- Authentication scaffolding depends on JWT configuration
+
+**Day 4 Database Setup (Depends on Backend)**
+- Prisma initialization depends on TypeScript configuration
+- Schema definition can happen independently
+- Migrations depend on schema definition
+- Docker Compose should be set up early for parallel backend testing
+
+**Day 5 CI/CD Setup (Depends on All Prior Work)**
+- CI workflows depend on complete application structure
+- Deployment workflows depend on hosting account setup (Vercel, Railway)
+- Testing workflows depend on test infrastructure in apps
+- Documentation depends on complete working setup
+
+**Parallelization Opportunities**
+- Frontend and backend app setup (Days 2-3) can happen simultaneously
+- Docker Compose setup can happen in parallel with app initialization
+- Documentation writing can happen concurrently with development
+
+# Risks and Mitigations
+**Monorepo Complexity**
+- Risk: Team unfamiliar with monorepo tooling causes confusion
+- Mitigation: Provide clear documentation, use well-established tools (Turborepo), create setup scripts that abstract complexity, pair programming during setup
+
+**Dependency Version Conflicts**
+- Risk: Incompatible package versions between workspace packages
+- Mitigation: Use exact versions in package.json, configure dependabot for automated updates, test version bumps in isolated branches
+
+**Docker Setup Issues**
+- Risk: Developers struggle with Docker installation or configuration
+- Mitigation: Provide alternative local setup without Docker, document common Docker issues and solutions, offer cloud development environments (GitHub Codespaces)
+
+**Database Migration Failures**
+- Risk: Initial migrations fail due to schema errors
+- Mitigation: Test migrations thoroughly on local environment, design reversible migrations, implement migration testing in CI pipeline
+
+**CI/CD Pipeline Failures**
+- Risk: Deployment pipelines fail intermittently, blocking development
+- Mitigation: Implement retry logic, set up comprehensive error logging, create manual deployment fallback, test pipelines before production use
+
+**Environment Variable Management**
+- Risk: Missing or incorrect environment variables cause runtime failures
+- Mitigation: Use environment variable validation on startup, provide comprehensive .env.example, document all required variables, implement environment-specific configs
+
+**Onboarding Friction**
+- Risk: New developers struggle to set up local environment
+- Mitigation: Create detailed setup documentation, record video walkthrough, provide setup scripts, implement health check endpoints, offer containerized development environment
+
+**Infrastructure Access Issues**
+- Risk: Team members lack access to deployment platforms or services
+- Mitigation: Document access requirements upfront, set up team accounts during initialization, create access request process, implement local development fallbacks
+
+# Appendix
+**Initial Setup Script (setup.sh)**
+
+```bash
+#!/bin/bash
+# Braystar PMS Setup Script
+
+echo "Setting up Braystar Property Management System..."
+
+# Check prerequisites
+command -v node >/dev/null 2>&1 || { echo "Node.js is required but not installed. Aborting." >&2; exit 1; }
+command -v docker >/dev/null 2>&1 || { echo "Docker is required but not installed. Aborting." >&2; exit 1; }
+
+# Install dependencies
+echo "Installing dependencies..."
+npm install
+
+# Copy environment variables
+echo "Setting up environment variables..."
+cp .env.example .env
+echo "Please update .env with your actual values"
+
+# Start Docker services
+echo "Starting Docker services (PostgreSQL, Redis)..."
+docker compose -f docker/docker-compose.yml up -d
+
+# Wait for database
+echo "Waiting for database to be ready..."
+sleep 5
+
+# Run database migrations
+echo "Running database migrations..."
+npm run db:migrate
+
+# Seed database with sample data
+echo "Seeding database..."
+npm run db:seed
+
+echo "Setup complete! Run 'npm run dev' to start development servers"
+```
+
+**Technology Versions**
+
+Specific versions to use for consistency:
+- Node.js: 20.11.0 LTS
+- Next.js: 14.1.0
+- React: 18.2.0
+- TypeScript: 5.3.3
+- Prisma: 5.9.0
+- PostgreSQL: 15.6
+- Redis: 7.2
+
+**Development Commands**
+
+```json
+{
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:migrate": "cd packages/database && prisma migrate dev",
+    "db:seed": "cd packages/database && tsx prisma/seed.ts",
+    "db:studio": "cd packages/database && prisma studio",
+    "docker:up": "docker compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker compose -f docker/docker-compose.yml down"
+  }
+}
+```
+
+**Shared TypeScript Configuration**
+
+Base tsconfig.json in packages/tsconfig/base.json:
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true
+  }
+}
+```
+
+**Initial Prisma Schema Template**
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  TENANT
+  OWNER
+  PROPERTY_MANAGER
+  ADMIN
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String
+  role          UserRole
+  firstName     String
+  lastName      String
+  phone         String?
+  avatar        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  ownedProperties Property[] @relation("PropertyOwner")
+  leases          LeaseTenant[]
+  @@map("users")
+}
+
+model Property {
+  id        String   @id @default(uuid())
+  ownerId   String
+  owner     User     @relation("PropertyOwner", fields: [ownerId], references: [id])
+  address   Json
+  details   Json?
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  units Unit[]
+  @@map("properties")
+}
+
+// Additional models: Unit, Lease, LeaseTenant, Payment, MaintenanceRequest
+```
+
+**GitHub Actions CI Workflow Template**
+
+```yaml
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run lint
+      - run: npm run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run test
+```
+</PRD>

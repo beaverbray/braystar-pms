@@ -1,0 +1,171 @@
+<context>
+# Overview
+The Market Research phase establishes the foundation for the Braystar Property Management System by validating assumptions, identifying target users, analyzing competitors, and determining product-market fit. This phase answers critical questions about who we're building for, what problems we're solving, and how we'll differentiate from existing solutions. Success in this phase prevents costly pivots later and ensures we build features users actually need.
+
+# Core Features
+The market research initiative encompasses four primary research streams:
+
+**User Research & Personas**
+- Conduct 10-20 in-depth interviews with property managers and owners
+- Identify primary user segments (small portfolio owners, medium property managers, large enterprises)
+- Map property type priorities (single-family, multi-family, commercial)
+- Document demographic profiles, tech-savviness, and investment styles
+- Define tenant demographics and preferences
+
+**Competitive Analysis**
+- Create comprehensive feature matrix of top 5-7 competitors (AppFolio, Buildium, Propertyware, Rent Manager, TenantCloud)
+- Analyze pricing models (per-unit, flat fee, transaction-based, freemium)
+- Extract user sentiment from app store reviews and support forums
+- Identify feature gaps and underserved use cases
+- Evaluate AI/automation capabilities in existing solutions
+
+**Feature Validation & Prioritization**
+- Survey 50+ potential users on pricing and feature preferences
+- Validate AI feature value propositions through user feedback
+- Determine must-have vs. nice-to-have features
+- Assess willingness to pay for premium features
+- Identify most time-consuming workflows that need automation
+
+**Market Positioning & Go-to-Market**
+- Define differentiation strategy (AI-first, superior UX, competitive pricing)
+- Identify marketing channels and early adopter segments
+- Research partnership opportunities
+- Validate pricing strategy against market benchmarks
+- Estimate customer acquisition costs and lifetime value
+</context>
+
+<PRD>
+# Technical Architecture
+Market research infrastructure requires minimal technical implementation but relies on systematic data collection and analysis:
+
+**Data Collection Systems**
+- Survey platform: Typeform or Google Forms for quantitative data
+- Interview platform: Calendly + Zoom for scheduling and conducting interviews
+- Note-taking system: Notion or Airtable for organizing insights
+- Analytics tools: Spreadsheets for competitive analysis matrices
+
+**Research Artifacts**
+- User interview transcripts and synthesis documents
+- Competitive feature comparison matrix (Excel/Google Sheets)
+- Survey results with statistical analysis
+- User persona documents with demographics and pain points
+- Pricing analysis spreadsheet with competitor benchmarks
+
+**Validation Framework**
+- Hypothesis-driven research questions mapped to data collection methods
+- Success criteria for each research stream
+- Timeline for research activities with deadlines
+- Stakeholder review checkpoints
+
+# Development Roadmap
+The market research phase is structured as a 2-week intensive discovery period:
+
+**Week 1: User Discovery**
+- Days 1-2: Finalize interview guides and survey questions
+- Days 3-5: Recruit and schedule 10-20 interview participants from property management forums, LinkedIn, real estate investor groups
+- Days 6-7: Conduct first 5 user interviews, begin transcription and synthesis
+
+**Week 2: Competitive Analysis & Validation**
+- Days 8-10: Complete remaining 5-15 user interviews
+- Days 11-12: Build competitive analysis feature matrix, analyze pricing models, review user feedback from app stores
+- Day 13: Launch user survey to 50+ potential users via targeted distribution
+- Day 14: Synthesize findings, create user personas, draft initial feature prioritization
+
+**Deliverables**
+- User interview synthesis document with key themes and quotes
+- 3-5 detailed user personas with demographics, goals, pain points
+- Competitive analysis matrix comparing features, pricing, user sentiment
+- Survey results report with statistical analysis
+- Feature prioritization framework based on user feedback
+- Pricing strategy recommendations
+- Go-to-market positioning statement
+
+# Logical Dependency Chain
+Market research is the critical first step that informs all subsequent planning and development:
+
+**Foundation Layer (Must Complete First)**
+- User interviews must be completed before persona creation
+- Competitive analysis must be done before feature prioritization
+- Survey data collection must precede statistical analysis
+
+**Analysis Layer (Depends on Foundation)**
+- Persona creation depends on user interview synthesis
+- Feature prioritization depends on user interviews, competitive analysis, and survey results
+- Pricing strategy depends on competitive analysis and willingness-to-pay surveys
+
+**Strategic Layer (Depends on Analysis)**
+- Go-to-market positioning depends on competitive analysis and persona validation
+- MVP feature scoping depends on feature prioritization
+- Technical planning phase can only begin after feature prioritization is complete
+
+**Iteration Opportunities**
+- User interviews can reveal new research questions requiring additional surveys
+- Competitive analysis may uncover features requiring deeper user validation
+- Survey results may prompt follow-up interviews for qualitative insights
+
+# Risks and Mitigations
+**Recruitment Challenges**
+- Risk: Difficulty finding 10-20 qualified interview participants
+- Mitigation: Tap multiple recruitment channels (LinkedIn, property management forums, real estate investor groups, offer incentives like gift cards or early access)
+
+**Bias in Self-Reported Data**
+- Risk: Survey and interview responses may not reflect actual behavior
+- Mitigation: Ask behavior-focused questions ("When was the last time you...") rather than hypotheticals, validate findings across multiple data sources
+
+**Competitive Intelligence Gaps**
+- Risk: Limited visibility into competitor roadmaps and internal metrics
+- Mitigation: Supplement public data with user interviews about competitor experiences, join competitor platforms for firsthand testing, monitor product update announcements
+
+**Time Constraints**
+- Risk: 2-week timeline may be insufficient for quality insights
+- Mitigation: Pre-schedule interviews before start date, use asynchronous surveys to maximize parallel data collection, focus on highest-priority research questions first
+
+**Analysis Paralysis**
+- Risk: Over-researching delays development start
+- Mitigation: Define clear "good enough" criteria for each research stream, timebox research activities, accept that some questions will be answered through MVP testing
+
+**Changing Market Conditions**
+- Risk: Competitor launches new features during research phase
+- Mitigation: Set up Google Alerts and product monitoring, treat research as living document to be updated, focus on enduring user needs over reactive features
+
+# Appendix
+**Research Question Priorities (High/Medium/Low)**
+
+*High Priority - Must Answer for MVP*
+- Who are our primary target users? (user type, property types, portfolio size)
+- What are the top 5 must-have features for launch?
+- What is acceptable pricing? (model, price points, payment preferences)
+- What are the biggest pain points with current solutions?
+- Which AI features provide the most value?
+
+*Medium Priority - Important for Phase 2*
+- What integrations are essential? (accounting, background checks, listing syndication)
+- What communication preferences do users have? (email, SMS, in-app)
+- What reporting and analytics are most valuable?
+- What mobile capabilities are required?
+- What security and compliance concerns exist?
+
+*Low Priority - Can Validate Post-Launch*
+- What white-label or API needs exist?
+- What community features would increase engagement?
+- What advanced automation would users pay for?
+- What third-party marketplace opportunities exist?
+
+**Interview Guide Template**
+Available in research documentation, covering:
+- Current tools and workflows
+- Biggest pain points and time sinks
+- Feature wish list and prioritization
+- Pricing sensitivity and willingness to pay
+- AI feature reactions and concerns
+- Decision-making process and evaluation criteria
+
+**Survey Questions Bank**
+Structured survey covering:
+- Demographics (portfolio size, property types, role)
+- Feature importance ratings (1-5 scale)
+- Pricing model preferences
+- Current tool satisfaction scores
+- AI feature interest levels
+- Open-ended feedback
+</PRD>
